@@ -123,6 +123,19 @@ body {
     z-index: -1;
     opacity: 0.1;
 }
+.newsletter-iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            overflow: hidden;
+            background: transparent;
+            transition: height 0.3s ease;
+        }
+        @media (max-width: 640px) {
+            .newsletter-iframe {
+                height: 300px;
+            }
+        }
 
 @keyframes glitch {
     0% { transform: translate(0); }
@@ -907,24 +920,25 @@ body {
 
     </main>
 
+    
     <!-- Full-width Newsletter Section -->
-<section class="bg-green-600 text-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <!-- <div class="mb-6 md:mb-0 md:w-1/2">
-                <h2 class="text-3xl font-bold mb-2">Subscribe to Our Newsletter</h2>
-                <p class="text-lg">Stay updated with our latest content and cybersecurity insights.</p>
-            </div> -->
-            <div class="w-full md:w-1/2">
-                <iframe
-                    src="https://gamkers.beehiiv.com/subscribe"
-                    style="width:200%;height:250px;border:none;overflow:hidden;background:transparent;"
-                    scrolling="yes"
-                ></iframe>
+    <section class="bg-green-600 text-white py-8 sm:py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="mb-6 lg:mb-0 lg:w-1/2 text-center lg:text-left">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">Subscribe to Our Newsletter</h2>
+                    <p class="text-base sm:text-lg">Stay updated with our latest content and cybersecurity insights.</p>
+                </div>
+                <div class="w-full lg:w-1/2 max-w-md mx-auto lg:max-w-none">
+                    <iframe
+                        src="https://gamkers.beehiiv.com/subscribe"
+                        class="newsletter-iframe"
+                        scrolling="yes"
+                    ></iframe>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 <!-- Footer -->
 <footer class="bg-black text-green-400 p-6">
@@ -1025,25 +1039,25 @@ body {
 
     // Create video switchers for each section
     createVideoSwitcher('videoFrames1', 'prevVideos1', 'nextVideos1', [
-        "https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz", // Computer Types and Parts
-        "https://www.youtube.com/embed/5AqK29t3fXA?si=-qQ47ZrcQh0BOtpA", // Motherboards
-        "https://www.youtube.com/embed/VlOeLfV-ATA?si=X-Gv1rPiGsQuYGJg", // Processors (CPU)
-        "https://www.youtube.com/embed/zqbq7OJgheo?si=r0xnlfSwPjd80mt7", // Random Access Memory (RAM)
-        "https://www.youtube.com/embed/MIsETwOqmHQ?si=87Sbb0MhopRpFb9r", // Storage Devices
-        "https://www.youtube.com/embed/1hmwhxDRduc?si=zK-4UsJ72c8cmklF", // Computer Hardware and OS Essentials
-        "https://www.youtube.com/embed/1D3rxdySXso?si=qc1iPumY0_FhIFpI", // Graphics Processing Unit (GPU)
-        "https://www.youtube.com/embed/VUPdjoWfGnU?si=mqX8YpxejrV1Xlp2", // Input/Output Devices (I/O)
-        "https://www.youtube.com/embed/z5J7x_cmYdE?si=IqueYfv-ir3B3PQY", // Networking
-        "https://www.youtube.com/embed/tkJCYdJADeY?si=8iYQGA7iYYuDfLL9", // Network Infrastructure
-        "https://www.youtube.com/embed/VOtkna24FXY?si=4S99H9m8iLV_kMxL", // Virtualization and Cloud Computing
-        "https://www.youtube.com/embed/ViXJKobDy0I?si=_lZP4NGgKHwcWenE", // Mobile Devices
-        "https://www.youtube.com/embed/AVqLlkftfow?si=fM0itY05ZG30eE_B", // Internet of Things/IoT
-        "https://www.youtube.com/embed/POKjnMh2elc?si=SLD_uF1SMeG4F9Qu", // Printers
-        "https://www.youtube.com/embed/EtZ0_GSyYAE?si=6vKtPJaLaVofXZt_", // Operating System (OS) Fundamentals
-        "https://www.youtube.com/embed/sDD0SykHuyE?si=4oi4yNgVoAelB8zv", // Windows Desktop OS Fundamentals
-        "https://www.youtube.com/embed/iuBspqIaW0s?si=7TuBZ9UtdboFVV5e", // Installing Windows
-        "https://www.youtube.com/embed/KTZnXPf1rUU?si=aII55BYI8pgK98PN"  // Disks, Partitions, File Systems, and Volumes
-    ]);
+    "https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz", // Computer Types and Parts
+    "https://www.youtube.com/embed/5AqK29t3fXA?si=-qQ47ZrcQh0BOtpA", // Motherboards
+    "https://www.youtube.com/embed/VlOeLfV-ATA?si=X-Gv1rPiGsQuYGJg", // Processors (CPU)
+    "https://www.youtube.com/embed/zqbq7OJgheo?si=r0xnlfSwPjd80mt7", // Random Access Memory (RAM)
+    "https://www.youtube.com/embed/MIsETwOqmHQ?si=87Sbb0MhopRpFb9r", // Storage Devices
+    "https://www.youtube.com/embed/1hmwhxDRduc?si=zK-4UsJ72c8cmklF", // Computer Hardware and OS Essentials
+    "https://www.youtube.com/embed/1D3rxdySXso?si=qc1iPumY0_FhIFpI", // Graphics Processing Unit (GPU)
+    "https://www.youtube.com/embed/VUPdjoWfGnU?si=mqX8YpxejrV1Xlp2", // Input/Output Devices (I/O)
+    "https://www.youtube.com/embed/z5J7x_cmYdE?si=IqueYfv-ir3B3PQY", // Networking
+    "https://www.youtube.com/embed/tkJCYdJADeY?si=8iYQGA7iYYuDfLL9", // Network Infrastructure
+    "https://www.youtube.com/embed/VOtkna24FXY?si=4S99H9m8iLV_kMxL", // Virtualization and Cloud Computing
+    "https://www.youtube.com/embed/ViXJKobDy0I?si=_lZP4NGgKHwcWenE", // Mobile Devices
+    "https://www.youtube.com/embed/AVqLlkftfow?si=fM0itY05ZG30eE_B", // Internet of Things/IoT
+    "https://www.youtube.com/embed/POKjnMh2elc?si=SLD_uF1SMeG4F9Qu", // Printers
+    "https://www.youtube.com/embed/EtZ0_GSyYAE?si=6vKtPJaLaVofXZt_", // Operating System (OS) Fundamentals
+    "https://www.youtube.com/embed/sDD0SykHuyE?si=4oi4yNgVoAelB8zv", // Windows Desktop OS Fundamentals
+    "https://www.youtube.com/embed/iuBspqIaW0s?si=7TuBZ9UtdboFVV5e", // Installing Windows
+    "https://www.youtube.com/embed/KTZnXPf1rUU?si=aII55BYI8pgK98PN"  // Disks, Partitions, File Systems, and Volumes
+]);
 
 
     createVideoSwitcher('videoFrames2', 'prevVideos2', 'nextVideos2', [
