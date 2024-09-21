@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMKERS Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --primary-color: #00ff00;
+    --bg-color: #0a0a0a;
+    --card-bg-color: #1a1a1a;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hero-section {
+    background-image: url('/api/placeholder/1200/400');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 1rem;
+}
+
+.section-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--primary-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.hacker-btn {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Share Tech Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hacker-btn:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(-5px, -5px); }
+    60% { transform: translate(5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+    100% { transform: translate(0); }
+}
+
+.glitch {
+    animation: glitch 1s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .hero-section {
+        height: 70vh;
+    }
+
+    .hacker-btn {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    .hero-section {
+        height: 50vh;
+    }
+
+    .hacker-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}
+    </style>
+</head>
+<body class="text-green-400">
+    <canvas id="matrix" class="matrix-bg"></canvas>
+
+    <header class="bg-black p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl font-bold mb-4 md:mb-0"><i class="fas fa-shield-alt mr-2"></i>GAMKERS Learning Hub</h1>
+            <nav class="w-full md:w-auto">
+                <ul class="flex flex-wrap justify-center md:justify-end space-x-4">
+                    <li><a href="#introduction" class="hover:text-yellow-300 transition duration-300">Introduction</a></li>
+                    <li><a href="#networking" class="hover:text-yellow-300 transition duration-300">Networking</a></li>
+                    <li><a href="#os-scripting" class="hover:text-yellow-300 transition duration-300">OS & Scripting</a></li>
+                    <li><a href="#web-security" class="hover:text-yellow-300 transition duration-300">Web Security</a></li>
+                    <li><a href="#ethical-hacking" class="hover:text-yellow-300 transition duration-300">Ethical Hacking</a></li>
+                    <li><a href="#advanced-topics" class="hover:text-yellow-300 transition duration-300">Advanced Topics</a></li>
+                    <li><a href="#certifications" class="hover:text-yellow-300 transition duration-300">Certifications</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero-section flex items-center justify-center">
+        <div class="hero-content text-center text-white">
+            <h2 class="text-5xl font-bold mb-4 glitc">Master Cybersecurity</h2>
+            <p class="text-xl mb-8">Your journey to becoming a cybersecurity expert starts here</p>
+            <a href="#introduction" class="hacker-btn">Initiate Sequence</a>
+        </div>
+    </div>
+
+    <main class="container mx-auto mt-12 p-4"> <!-- Increased margin-top -->
+        <!-- Introduction Section -->
+        <section id="introduction" class="mb-16 fade-in">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fas fa-laptop-code mr-2"></i>Introduction to Cybersecurity
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="section-card p-6">
+                    <h3 class="text-xl font-semibold mb-4">Key Concepts</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <ul>
+                            <li><b>Basic IT Concepts</b>:
+                                <ul>
+                                    <li>Gain foundational knowledge of how data is <b>stored</b>, <b>processed</b>, and <b>transmitted</b> in computer systems.</li>
+                                    <li>Understand the <b>binary system</b>, <b>file systems</b>, and basic principles of <b>networking</b>.</li>
+                                </ul>
+                            </li>
+                            <li><b>Computer Hardware and Operating Systems</b>:
+                                <ul>
+                                    <li>Learn about core hardware components like the <b>CPU</b>, <b>RAM</b>, <b>motherboard</b>, and how these components work together.</li>
+                                    <li>Explore how <b>operating systems</b> (such as Windows, Linux) manage <b>hardware resources</b>, handle <b>process scheduling</b>, and <b>memory management</b>.</li>
+                                    <li>Understand concepts like <b>device drivers</b>, <b>file management</b>, and <b>user interfaces</b>.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                    </ul>
+                </div>
+                <div class="section-card p-6">
+                    <h3 class="text-xl font-semibold mb-4">Video Resources</h3>
+                    <div class="video-container">
+                        <iframe id="videoFrames1" class="rounded-lg" src="https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-controls">
+                        <button id="prevVideos1" class="hacker-btn">Previous</button>
+                        <button id="nextVideos1" class="hacker-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 section-card p-6">
+                <h3 class="text-xl font-semibold mb-4">Recommended Resources</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>
+                        <a href="https://www.comptia.org" class="text-blue-400 hover:underline" target="_blank">CompTIA IT Fundamentals+</a> - A comprehensive guide for those new to IT, covering essential IT knowledge.
+                    </li>
+
+                    <li>Book: <strong>"CompTIA IT Fundamentals+ Study Guide" by Quentin Docter</strong> - This book helps learners grasp foundational IT concepts and prepare for the CompTIA ITF+ exam.</li>
+                    <li>
+                        <a href="https://www.khanacademy.org/computing/computer-science" class="text-blue-400 hover:underline" target="_blank">Khan Academy Computer Science</a> - A free resource offering lessons on basic IT and computer science concepts.
+                    </li>
+                    <li>
+                        <a href="https://www.coursera.org/specializations/it-fundamentals-cybersecurity" class="text-blue-400 hover:underline" target="_blank">Coursera IT Fundamentals Specialization</a> - An online course for beginners covering IT fundamentals and cybersecurity basics.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Additional sections (Networking, OS & Scripting, etc.) would go here -->
+
+    <!-- Additional sections -->
+
+<!-- Networking Section -->
+<section id="networking" class="mb-16 fade-in">
+    <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-network-wired mr-2"></i>Networking Fundamentals</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Key Topics</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><b>Understanding LAN, WAN, and VPN</b>:
+                    <ul>
+                        <li>Learn the differences between <b>Local Area Networks (LAN)</b>, used for communication within a small area (like offices or homes), and <b>Wide Area Networks (WAN)</b>, which connect larger geographic areas such as cities or even countries.</li>
+                        <li>Understand how <b>Virtual Private Networks (VPN)</b> create secure, encrypted connections over the internet, providing privacy and security for data transmission.</li>
+                    </ul>
+                </li>
+                
+                <li><b>Network Protocols (HTTP, FTP, SSH)</b>:
+                    <ul>
+                        <li>Explore the roles of <b>HTTP</b> (Hypertext Transfer Protocol) in web communication, allowing browsers to communicate with web servers to display web pages.</li>
+                        <li>Understand <b>FTP</b> (File Transfer Protocol) for transferring files between a client and a server on a network.</li>
+                        <li>Learn about <b>SSH</b> (Secure Shell) for secure remote access to servers, ensuring encrypted communication.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Firewalls and Routers</b>:
+                    <ul>
+                        <li>Discover how <b>firewalls</b> monitor and control incoming and outgoing network traffic, acting as a barrier between trusted internal networks and untrusted external networks.</li>
+                        <li>Understand the role of <b>routers</b> in directing data packets between networks, ensuring that data reaches its correct destination efficiently and securely.</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Video Resources</h3>
+            <div class="video-container">
+                <iframe id="videoFrames2" class="rounded-lg" src="https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-controls">
+                <button id="prevVideos2" class="hacker-btn">Previous</button>
+                <button id="nextVideos2" class="hacker-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 section-card p-6">
+        <h3 class="text-xl font-semibold mb-4">Recommended Resources</h3>
+        <ul class="list-disc pl-5 space-y-2">
+            <li>
+                <a href="https://onlinecourses.nptel.ac.in/noc21_cs18/preview" class="text-blue-400 hover:underline" target="_blank">nptel free course</a> - Detailed resource explaining LAN, WAN, and their real-world applications.
+            </li>
+            <li>
+                <a href="https://www.coursera.org/learn/networks-and-network-security" class="text-blue-400 hover:underline" target="_blank">Coursera - Network Protocols and Architecture</a> - An online course covering essential network protocols like HTTP, FTP, and SSH.
+            </li>
+            <li>
+                Book: <strong>"Computer Networking: A Top-Down Approach" by James Kurose and Keith Ross</strong> - A comprehensive guide to computer networks, including protocols, security, and the role of routers and firewalls.
+            </li>
+            <li>
+                <a href="https://www.cloudflare.com/learning/network-layer/what-is-a-firewall/" class="text-blue-400 hover:underline" target="_blank">Cloudflare - What is a Firewall?</a> - A beginner-friendly explanation of firewalls, their importance, and how they protect networks.
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- OS & Scripting Section -->
+<section id="os-scripting" class="mb-16 fade-in">
+    <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-terminal mr-2"></i>OS & Scripting</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Key Concepts</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><b>Understanding Different Operating Systems (Windows, Linux, macOS)</b>:
+                    <ul>
+                        <li>Learn the core differences between popular operating systems like <b>Windows</b> (user-friendly, widely used for personal and business environments), <b>Linux</b> (open-source, popular in server and development environments), and <b>macOS</b> (used mainly by Apple devices, known for its smooth integration and design).</li>
+                        <li>Explore how each operating system manages resources, security, file systems, and supports different software environments.</li>
+                        <li>Understand their command-line tools, package management, and usage in development and production environments.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Basic Shell Scripting</b>:
+                    <ul>
+                        <li>Gain hands-on knowledge of how to write <b>shell scripts</b> to automate tasks in Unix-based systems (Linux/macOS).</li>
+                        <li>Understand key concepts like <b>variables</b>, <b>loops</b>, <b>conditionals</b>, and how to interact with the system's file structure using commands like <code>ls</code>, <code>cd</code>, and <code>grep</code>.</li>
+                        <li>Learn how shell scripting can simplify system administration, automate backups, and manage software installations.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Python Programming</b>:
+                    <ul>
+                        <li>Learn the basics of <b>Python</b>, a versatile, easy-to-learn programming language used in a wide range of applications from web development to data science and automation.</li>
+                        <li>Understand Python fundamentals such as <b>variables</b>, <b>data types</b>, <b>control structures</b>, and working with <b>modules and libraries</b> to extend functionality.</li>
+                        <li>Explore Python's use in building scripts, developing web applications, data analysis, and even machine learning.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Video Resources</h3>
+            <div class="video-container">
+                <iframe id="videoFrames3" class="rounded-lg" src="https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-controls">
+                <button id="prevVideos3" class="hacker-btn">Previous</button>
+                <button id="nextVideos3" class="hacker-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 section-card p-6">
+        <h3 class="text-xl font-semibold mb-4">Recommended Resources</h3>
+        <ul class="list-disc pl-5 space-y-2">
+               <!-- Operating Systems -->
+    <li>
+        <a href="https://ubuntu.com/tutorials/command-line-for-beginners" class="text-blue-400 hover:underline" target="_blank">Ubuntu - Command Line for Beginners</a> - A beginner's guide to Linux commands and shell scripting basics.
+    </li>
+    <li>
+        <strong>Book: "Operating Systems: Three Easy Pieces" by Remzi H. Arpaci-Dusseau</strong> - A great book for understanding how operating systems work under the hood.
+    </li>
+
+    <!-- Shell Scripting -->
+    <li>
+        <a href="https://www.codecademy.com/catalog/language/bash" class="text-blue-400 hover:underline" target="_blank">Codecademy - Learn Bash/Shell</a> - An interactive course for mastering shell scripting in a Unix/Linux environment.
+    </li>
+    <li>
+        <strong>Book: "The Linux Command Line" by William E. Shotts</strong> - A comprehensive guide for mastering the command line and shell scripting.
+    </li>
+
+    <!-- Python Programming -->
+    <li>
+        <a href="https://www.udemy.com/course/python-3-for-total-beginners/" class="text-blue-400 hover:underline" target="_blank">Udemy - Python 3 for Total Beginners</a> - An easy-to-follow course for those new to Python, covering all the basics to get you started.
+    </li>
+    <li>
+        <a href="https://realpython.com/" class="text-blue-400 hover:underline" target="_blank">Real Python</a> - A resource offering tutorials, articles, and hands-on projects for Python learners.
+    </li>
+    <li>
+        <strong>Book: "Automate the Boring Stuff with Python" by Al Sweigart</strong> - A beginner-friendly book to learn Python through practical projects and automation tasks.
+    </li>
+
+    <!-- Kali Linux and Cybersecurity -->
+    <li>
+        <a href="https://www.coursera.org/learn/kali-linux" class="text-blue-400 hover:underline" target="_blank">Coursera - Kali Linux for Pentesters</a> - Learn the fundamentals of Kali Linux, a popular Linux distribution for ethical hacking and penetration testing.
+    </li>
+    <li>
+        <strong>Book: "Kali Linux Revealed" by Raphael Hertzog and Jim O'Gorman</strong> - A complete guide to mastering Kali Linux for cybersecurity professionals.
+    </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Web Security Section -->
+<section id="web-security" class="mb-16 fade-in">
+    <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-globe mr-2"></i>Bug Bounty</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Key Topics</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><b>Common Web Vulnerabilities (XSS, SQL Injection)</b>:
+                    <ul>
+                        <li>Understand how attackers exploit vulnerabilities like <b>Cross-Site Scripting (XSS)</b> to inject malicious scripts into web pages viewed by other users.</li>
+                        <li>Learn about <b>SQL Injection</b>, where attackers manipulate a website's database queries to access sensitive information or take control of the server.</li>
+                        <li>Gain practical knowledge in identifying and mitigating these vulnerabilities by following OWASP guidelines and practicing on vulnerable applications.</li>
+                        <li><strong>Tip:</strong> Use tools like <a href="https://portswigger.net/burp" class="text-blue-400 hover:underline" target="_blank">Burp Suite</a> or <a href="https://www.kali.org/tools/sqlmap/" class="text-blue-400 hover:underline" target="_blank">SQLMap</a> for testing and identifying web vulnerabilities.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Secure Coding Practices</b>:
+                    <ul>
+                        <li>Learn to write secure code by following best practices such as input validation, proper error handling, and avoiding hard-coded secrets.</li>
+                        <li>Understand how to sanitize user input to prevent attacks like XSS and SQL Injection from occurring in the first place.</li>
+                        <li>Adopt the principle of least privilege, ensuring that your code only has access to the resources and data it needs.</li>
+                        <li><strong>Tip:</strong> Regularly audit your code for security flaws and use static analysis tools like <a href="https://github.com/returntocorp/semgrep" class="text-blue-400 hover:underline" target="_blank">Semgrep</a> or <a href="https://sonarcloud.io/" class="text-blue-400 hover:underline" target="_blank">SonarQube</a> to find vulnerabilities in your code.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Understanding HTTPS and SSL/TLS</b>:
+                    <ul>
+                        <li>Explore how HTTPS, powered by SSL/TLS, ensures secure communication between the client and server by encrypting data.</li>
+                        <li>Learn about certificates, how they authenticate websites, and ensure data integrity by preventing man-in-the-middle attacks.</li>
+                        <li>Understand common weaknesses in SSL/TLS implementations, such as outdated protocols and weak ciphers, and how to mitigate them.</li>
+                        <li><strong>Tip:</strong> Use tools like <a href="https://www.ssllabs.com/ssltest/" class="text-blue-400 hover:underline" target="_blank">SSL Labs</a> to test the SSL/TLS configuration of websites and identify any security gaps.</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <!-- Steps to Perform Bug Bounty -->
+            <h2 class="text-lg font-bold">Steps to Perform Bug Bounty</h2>
+            <ol class="list-decimal pl-5 space-y-2">
+                <li><b>Choose a Bug Bounty Platform:</b>
+                    <ul>
+                        <li>Join reputable platforms like <a href="https://www.hackerone.com/" class="text-blue-400 hover:underline" target="_blank">HackerOne</a>, <a href="https://bugcrowd.com/" class="text-blue-400 hover:underline" target="_blank">Bugcrowd</a>, or <a href="https://synack.com/" class="text-blue-400 hover:underline" target="_blank">Synack</a> to start participating in bug bounty programs.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Select a Target:</b>
+                    <ul>
+                        <li>Once you’re on the platform, select a target based on your expertise and interest. Choose a program that has a clear scope and defines which assets you are allowed to test.</li>
+                        <li>Make sure to read the <b>rules of engagement</b> to avoid testing assets that are off-limits or violating the program’s terms.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Reconnaissance:</b>
+                    <ul>
+                        <li>Gather as much information about the target as possible. Use tools like <a href="https://github.com/tomnomnom/assetfinder" class="text-blue-400 hover:underline" target="_blank">Assetfinder</a> to find subdomains and <a href="https://nmap.org/" class="text-blue-400 hover:underline" target="_blank">Nmap</a> for network mapping.</li>
+                        <li>Utilize passive reconnaissance techniques such as checking <a href="https://crt.sh/" class="text-blue-400 hover:underline" target="_blank">Certificate Transparency Logs</a> and <a href="https://www.shodan.io/" class="text-blue-400 hover:underline" target="_blank">Shodan</a> to identify potential attack surfaces.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Testing for Vulnerabilities:</b>
+                    <ul>
+                        <li>Use tools like <a href="https://portswigger.net/burp" class="text-blue-400 hover:underline" target="_blank">Burp Suite</a> or <a href="https://www.zaproxy.org/" class="text-blue-400 hover:underline" target="_blank">OWASP ZAP</a> to test for common vulnerabilities such as <b>XSS</b>, <b>SQL Injection</b>, and <b>CSRF</b>.</li>
+                        <li>For more complex testing, explore using tools like <a href="https://www.kali.org/tools/" class="text-blue-400 hover:underline" target="_blank">Kali Linux</a> tools and scripts for manual exploitation.</li>
+                        <li>Document any vulnerabilities you find with sufficient evidence, such as screenshots, proof-of-concept (PoC) scripts, or videos demonstrating the exploit.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Reporting the Vulnerability:</b>
+                    <ul>
+                        <li>Write a detailed report describing the vulnerability, how it can be exploited, its impact, and any potential fixes.</li>
+                        <li>Include all necessary evidence (e.g., logs, screenshots, or videos) and follow the platform's guidelines for reporting.</li>
+                        <li>Make sure your report is clear, concise, and easy to understand to increase your chances of being rewarded.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Stay Up to Date:</b>
+                    <ul>
+                        <li>Stay informed about the latest vulnerabilities and trends in the security community by following sources like <a href="https://thehackernews.com/" class="text-blue-400 hover:underline" target="_blank">The Hacker News</a> and <a href="https://www.exploit-db.com/" class="text-blue-400 hover:underline" target="_blank">Exploit-DB</a>.</li>
+                        <li>Continuously improve your skills by practicing on bug bounty platforms and collaborating with other security researchers.</li>
+                    </ul>
+                </li>
+            </ol>
+            </ul>
+        </div>
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Video Resources</h3>
+            <div class="video-container">
+                <iframe id="videoFrames4" class="rounded-lg" src="https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrame4" class="rounded-lg" src="https://www.youtube.com/embed/1GJ_LwNw6sc?si=T834WoevoDw3fZtd" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrame4" class="rounded-lg" src="https://www.youtube.com/embed/IWWYNDiwYOA?si=R3cnLU2NbInpo7TA" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrame4" class="rounded-lg" src= "https://www.youtube.com/embed/QJ5u_dHwoAk?si=SeE-hqRiEfLPQO03" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+           
+
+
+        </div>
+    </div>
+
+    <div class="mt-8 section-card p-6">
+        <h3 class="text-xl font-semibold mb-4">Recommended Resources</h3>
+        <ul class="list-disc pl-5 space-y-2">
+            <li>
+                <a href="https://owasp.org/www-project-top-ten/" class="text-blue-400 hover:underline" target="_blank">OWASP Top Ten</a> - Learn about the most common web vulnerabilities and how to protect against them.
+            </li>
+            <li>
+                <strong>Book: "The Web Application Hacker's Handbook" by Dafydd Stuttard and Marcus Pinto</strong> - A must-read for anyone learning web application security and bug bounty hunting.
+            </li>
+        
+            <!-- Secure Coding Practices -->
+            <li>
+                <a href="https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_Cheat_Sheet.html" class="text-blue-400 hover:underline" target="_blank">OWASP Secure Coding Practices</a> - A comprehensive guide on writing secure code and avoiding common vulnerabilities.
+            </li>
+            <li>
+                <strong>Book: "Secure Coding in C and C++" by Robert C. Seacord</strong> - A great resource for learning how to write secure code, especially in C/C++ environments.
+            </li>
+        
+            <!-- HTTPS and SSL/TLS -->
+            <li>
+                <a href="https://www.ssllabs.com/ssltest/" class="text-blue-400 hover:underline" target="_blank">SSL Labs - SSL Test</a> - Test websites for SSL/TLS security and identify any weak points in their configuration.
+            </li>
+            <li>
+                <strong>Book: "Bulletproof SSL and TLS" by Ivan Ristić</strong> - A detailed guide to mastering SSL/TLS and ensuring secure web communications.
+            </li>
+        
+            <!-- Bug Bounty Tips -->
+            <li><b>Bug Bounty Tips:</b>
+                <ul>
+                    <li>Focus on the most common vulnerabilities listed in the <a href="https://owasp.org/www-project-top-ten/" class="text-blue-400 hover:underline" target="_blank">OWASP Top Ten</a>.</li>
+                    <li>Participate in online forums and communities, such as <a href="https://www.reddit.com/r/netsec/" class="text-blue-400 hover:underline" target="_blank">Reddit's NetSec</a> or <a href="https://security.stackexchange.com/" class="text-blue-400 hover:underline" target="_blank">Security Stack Exchange</a>, to share knowledge and learn from others.</li>
+                    <li>Keep a vulnerability database to track your findings, methodologies, and any tools you use to streamline future tests.</li>
+                    <li>Practice consistently by participating in Capture The Flag (CTF) challenges and using platforms like <a href="https://www.hackthebox.com/" class="text-blue-400 hover:underline" target="_blank">Hack The Box</a> or <a href="https://tryhackme.com/" class="text-blue-400 hover:underline" target="_blank">TryHackMe</a>.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Ethical Hacking Section -->
+<section id="ethical-hacking" class="mb-16 fade-in">
+    <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-user-shield mr-2"></i>Ethical Hacking</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Key Concepts</h3>
+            
+                <li><b>Understanding Ethical Hacking</b>:
+                    <ul>
+                        <li><b>Understanding Ethical Hacking</b>:
+                            <ul>
+                                <li>Ethical hacking involves legally probing systems for vulnerabilities, contrasting with malicious hacking aimed at exploitation.</li>
+                                <li>Explore various types of ethical hackers:
+                                    <ul>
+                                        <li><strong>White Hat:</strong> Authorized individuals helping organizations secure their systems.</li>
+                                        <li><strong>Gray Hat:</strong> Operate in a morally ambiguous area, testing systems without permission but reporting vulnerabilities.</li>
+                                        <li><strong>Black Hat:</strong> Malicious hackers who exploit vulnerabilities for personal gain.</li>
+                                    </ul>
+                                </li>
+                                <li>Understand the ethical implications of hacking, emphasizing responsibility and integrity.</li>
+                                <li><strong>Tip:</strong> Familiarize yourself with key ethical hacking frameworks like the <a href="https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/" class="text-blue-400 hover:underline" target="_blank">CEH Framework</a> and <a href="https://www.pentest-standard.org/index.php/Main_Page" class="text-blue-400 hover:underline" target="_blank">PTES</a>.</li>
+                            </ul>
+                        </li>
+                    
+                        <li><b>Tools and Methodologies Used by Ethical Hackers</b>:
+                            <ul>
+                                <li>Discover essential tools:
+                                    <ul>
+                                        <li><a href="https://www.kali.org/" class="text-blue-400 hover:underline" target="_blank">Kali Linux</a> - A popular Linux distribution with pre-installed security tools.</li>
+                                        <li><a href="https://www.owasp.org/index.php/OWASP_Zap" class="text-blue-400 hover:underline" target="_blank">OWASP ZAP</a> - A web application security scanner.</li>
+                                        <li><a href="https://www.burp-suite.com/" class="text-blue-400 hover:underline" target="_blank">Burp Suite</a> - A tool for testing web application security.</li>
+                                    </ul>
+                                </li>
+                                <li>Learn about methodologies:
+                                    <ul>
+                                        <li><strong>Reconnaissance:</strong> Gathering information about the target system.</li>
+                                        <li><strong>Scanning:</strong> Identifying open ports and services.</li>
+                                        <li><strong>Exploitation:</strong> Attempting to exploit vulnerabilities to gain access.</li>
+                                        <li><strong>Reporting:</strong> Documenting findings and recommendations.</li>
+                                    </ul>
+                                </li>
+                                <li>Understand the significance of documenting your processes and findings, which is crucial for client communication and future reference.</li>
+                                <li><strong>Tip:</strong> Regularly practice with tools in controlled environments like <a href="https://www.vulnhub.com/" class="text-blue-400 hover:underline" target="_blank">VulnHub</a> or <a href="https://www.hackthebox.com/" class="text-blue-400 hover:underline" target="_blank">Hack The Box</a> to sharpen your skills.</li>
+                                <li><b>Hack The Box CTF:</b>
+                                    <ul>
+                                        <li>Hack The Box (HTB) is an online platform that provides various challenges and Capture The Flag (CTF) exercises for ethical hackers.</li>
+                                        <li>It offers a wide range of scenarios, including web application hacking, reverse engineering, and binary exploitation.</li>
+                                        <li>Participating in HTB enhances practical skills and helps build a portfolio for aspiring ethical hackers.</li>
+                                        <li><strong>Tip:</strong> Join the community forums to discuss challenges and solutions with other ethical hackers.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    
+                        <li><b>Legal and Ethical Considerations</b>:
+                            <ul>
+                                <li>Understand the legal landscape surrounding ethical hacking, including the need for permissions and adherence to laws such as the Computer Fraud and Abuse Act (CFAA).</li>
+                                <li>Learn about ethical responsibilities, focusing on:
+                                    <ul>
+                                        <li>Respecting user privacy and data security.</li>
+                                        <li>Being transparent with clients about your methods and findings.</li>
+                                        <li>Ensuring no harm comes to systems or data during testing.</li>
+                                    </ul>
+                                </li>
+                                <li>Familiarize yourself with ethical hacking certifications like:
+                                    <ul>
+                                        <li><a href="https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/" class="text-blue-400 hover:underline" target="_blank">Certified Ethical Hacker (CEH)</a></li>
+                                        <li><a href="https://www.offensive-security.com/pwk-oscp/" class="text-blue-400 hover:underline" target="_blank">Offensive Security Certified Professional (OSCP)</a></li>
+                                    </ul>
+                                </li>
+                                <li><strong>Tip:</strong> Always document permissions, agreements, and the scope of testing to protect yourself legally.</li>
+                            </ul>
+                        </li>
+                    
+                        <li><b>Active Directory Hacking</b>:
+                            <ul>
+                                <li>Understand the role of Active Directory (AD) in managing user access and security in Windows environments.</li>
+                                <li>Learn about common AD attack vectors:
+                                    <ul>
+                                        <li><strong>Pass-the-Hash:</strong> Exploiting password hashes for authentication without cracking the password.</li>
+                                        <li><strong>Kerberos Attacks:</strong> Attacking the Kerberos authentication protocol used by AD.</li>
+                                        <li><strong>LDAP Injection:</strong> Injecting malicious LDAP queries to manipulate AD data.</li>
+                                    </ul>
+                                </li>
+                                <li>Familiarize yourself with tools used in AD penetration testing, such as <a href="https://github.com/PowerShellMafia/PowerSploit" class="text-blue-400 hover:underline" target="_blank">PowerSploit</a> and <a href="https://www.impacket.org/" class="text-blue-400 hover:underline" target="_blank">Impacket</a>.</li>
+                                <li><strong>Tip:</strong> Always ensure that your testing environment is isolated to prevent unintended consequences.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <!-- Ethical Hacking Roadmap -->
+                    <h3 class="mt-5 text-lg font-semibold">Ethical Hacking Roadmap</h3>
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li>Start with foundational IT knowledge (networks, OS, basic programming).</li>
+                        <li>Learn about different types of cybersecurity threats and vulnerabilities.</li>
+                        <li>Familiarize yourself with ethical hacking tools and methodologies.</li>
+                        <li>Gain practical experience through labs, CTFs, and bug bounty programs.</li>
+                        <li>Participate in platforms like Hack The Box to challenge your skills.</li>
+                        <li>Engage in online courses and workshops to deepen your understanding.</li>
+                        <li>Pursue certifications (CEH, OSCP) to validate your skills.</li>
+                        <li>Engage with the cybersecurity community through forums and conferences to stay updated on trends and techniques.</li>
+                        <li>Contribute to open-source security projects to build your portfolio.</li>
+                        <li>Continue learning about the latest security tools and vulnerabilities through blogs and research papers.</li>
+                    </ol>
+        </div>
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Video Resources</h3>
+            <div class="video-container">
+                <iframe id="videoFrames5" class="rounded-lg" src="https://www.youtube.com/embed/3FNYvj2U0HM?si=qkiNpz37FU0ottag" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames5" class="rounded-lg" src="https://www.youtube.com/embed/sH4JCwjybGs?si=jY1WhKmGQFRHKAME" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames5" class="rounded-lg" src="https://www.youtube.com/embed/TTw-EY7F1rM?si=jV2-d__-usVX88jt" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames5" class="rounded-lg" src="https://www.youtube.com/embed/videoseries?si=CxfAdOmUHTXSfsxR&amp;list=PLHUKi1UlEgOINz5PLYb9yu7evQZ_5MQ21" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames5" class="rounded-lg" src="https://www.youtube.com/embed/VXxH4n684HE?si=UihkWRHGkTmHvqww" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mt-8 section-card p-6">
+        <h3 class="text-xl font-semibold mb-4">Recommended Resources</h3>
+        <ul class="list-disc pl-5 space-y-2">
+            <li>
+                <strong>Book: "The Hacker Playbook 3: Practical Guide To Penetration Testing" by Peter Kim</strong> - Offers practical techniques and insights into penetration testing.
+            </li>
+            <li>
+                <a href="https://www.cybrary.it/course/ethical-hacking/" class="text-blue-400 hover:underline" target="_blank">Cybrary Ethical Hacking Course</a> - Comprehensive course introducing ethical hacking concepts and practices.
+            </li>
+            <li>
+                <a href="https://www.hacker101.com/" class="text-blue-400 hover:underline" target="_blank">Hacker101</a> - A free class for web security and bug bounty hunting, providing real-world scenarios.
+            </li>
+            <li>
+                <a href="https://www.mygreatlearning.com/academy/learn-for-free/courses/introduction-to-ethical-hacking" class="text-blue-400 hover:underline" target="_blank">Great Learning Ethical Hacking Course</a> - A free introductory course covering the fundamentals of ethical hacking.
+            </li>
+            <li>
+                <a href="https://onlinecourses.nptel.ac.in/noc22_cs13/preview" class="text-blue-400 hover:underline" target="_blank">NPTEL Ethical Hacking Course</a> - Free online course focusing on ethical hacking principles and practices.
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Advanced Topics Section -->
+<section id="advanced-topics" class="mb-16 fade-in">
+    <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-lightbulb mr-2"></i>Advanced Topics</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Key Topics</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><b>Network Forensics</b>:
+                    <ul>
+                        <li>Network forensics focuses on capturing, recording, and analyzing network traffic to identify security breaches and gather evidence for investigation.</li>
+                        <li>Key objectives of network forensics:
+                            <ul>
+                                <li><strong>Incident Detection:</strong> Identifying malicious activities, such as data exfiltration, DDoS attacks, or unauthorized access attempts.</li>
+                                <li><strong>Evidence Collection:</strong> Capturing and analyzing network traffic to gather admissible evidence.</li>
+                                <li><strong>Root Cause Analysis:</strong> Investigating the source and method of an attack to understand how the breach occurred.</li>
+                            </ul>
+                        </li>
+                        <li>Common tools used for network forensics:
+                            <ul>
+                                <li><a href="https://www.wireshark.org/" class="text-blue-400 hover:underline" target="_blank">Wireshark</a> - A popular network protocol analyzer for capturing and inspecting network packets.</li>
+                                <li><a href="https://www.tcpdump.org/" class="text-blue-400 hover:underline" target="_blank">tcpdump</a> - A command-line packet analyzer that allows deep inspection of traffic.</li>
+                                <li><a href="https://www.netresec.com/?page=NetworkMiner" class="text-blue-400 hover:underline" target="_blank">NetworkMiner</a> - A network forensic analysis tool used to reconstruct sessions and analyze network traffic.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tip:</strong> Regularly practice capturing and analyzing traffic using tools like Wireshark in a lab environment to strengthen your skills.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Malware Analysis</b>:
+                    <ul>
+                        <li>Malware analysis is the process of understanding the behavior, purpose, and impact of malicious software on a system or network.</li>
+                        <li>Types of malware analysis:
+                            <ul>
+                                <li><strong>Static Analysis:</strong> Examining malware without executing it, often by analyzing its code, strings, and metadata.</li>
+                                <li><strong>Dynamic Analysis:</strong> Observing the behavior of malware in a controlled environment (sandbox) to understand its impact when executed.</li>
+                                <li><strong>Hybrid Analysis:</strong> Combining static and dynamic approaches for a comprehensive understanding of malware behavior.</li>
+                            </ul>
+                        </li>
+                        <li>Tools for malware analysis:
+                            <ul>
+                                <li><a href="https://github.com/VirusTotal" class="text-blue-400 hover:underline" target="_blank">VirusTotal</a> - A platform for scanning and analyzing files and URLs for malware detection.</li>
+                                <li><a href="https://www.remnux.org/" class="text-blue-400 hover:underline" target="_blank">REMnux</a> - A Linux toolkit for reverse engineering and analyzing malware.</li>
+                                <li><a href="https://www.cuckoosandbox.org/" class="text-blue-400 hover:underline" target="_blank">Cuckoo Sandbox</a> - An automated malware analysis system that executes and inspects malware in a controlled environment.</li>
+                                <li><a href="https://ghidra-sre.org/" class="text-blue-400 hover:underline" target="_blank">Ghidra</a> - A reverse-engineering tool used for analyzing malicious code.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tip:</strong> Set up a virtual lab with tools like REMnux or Cuckoo Sandbox to safely analyze malware in an isolated environment.</li>
+                    </ul>
+                </li>
+            
+                <li><b>Incident Response Strategies</b>:
+                    <ul>
+                        <li>Incident response involves a structured approach to handling security breaches or attacks in a way that limits damage and reduces recovery time and costs.</li>
+                        <li>Steps in the incident response process:
+                            <ul>
+                                <li><strong>Preparation:</strong> Developing policies and incident response plans, along with training staff on how to handle security incidents.</li>
+                                <li><strong>Identification:</strong> Detecting and determining the scope of the security breach.</li>
+                                <li><strong>Containment:</strong> Isolating the compromised systems to prevent further damage.</li>
+                                <li><strong>Eradication:</strong> Identifying and removing the root cause of the breach, such as malware or vulnerabilities.</li>
+                                <li><strong>Recovery:</strong> Restoring and validating affected systems and services to ensure they are free from threats.</li>
+                                <li><strong>Lessons Learned:</strong> Documenting the incident, identifying weaknesses, and improving response strategies for future incidents.</li>
+                            </ul>
+                        </li>
+                        <li>Incident response tools:
+                            <ul>
+                                <li><a href="https://www.splunk.com/" class="text-blue-400 hover:underline" target="_blank">Splunk</a> - A platform for searching, monitoring, and analyzing machine-generated big data, often used in incident response for log analysis.</li>
+                                <li><a href="https://www.sans.org/cyber-security-skills/" class="text-blue-400 hover:underline" target="_blank">SANS DFIR Toolkit</a> - A collection of free incident response and forensic tools offered by the SANS Institute.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tip:</strong> Regularly conduct incident response drills (such as tabletop exercises) to test your organization’s preparedness and response capabilities.</li>
+                    </ul>
+                </li>
+                <h3 class="mt-5 text-lg font-semibold">Roadmap for Malware Analysis, Network Forensics, and Incident Response</h3>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>Start with foundational knowledge of networking and operating systems (Linux, Windows).</li>
+                    <li>Learn about common cybersecurity threats, including malware types and attack vectors.</li>
+                    <li>Understand key concepts in network traffic analysis, such as packet capture and inspection.</li>
+                    <li>Get hands-on experience with malware analysis by setting up a virtual lab environment.</li>
+                    <li>Familiarize yourself with popular forensic and incident response tools like Wireshark and Splunk.</li>
+                    <li>Participate in cybersecurity challenges (CTFs) or labs focusing on malware analysis and forensics.</li>
+                    <li>Develop incident response plans and engage in tabletop exercises to simulate real-world scenarios.</li>
+                    <li>Pursue certifications in malware analysis, network forensics, and incident response (e.g., GIAC certifications).</li>
+                    <li>Engage with the community to stay updated on new malware trends and incident response techniques.</li>
+                </ol>
+                <li><b>Cloud Security</b>:
+                    <ul>
+                        <li>Cloud security focuses on protecting cloud-based infrastructures, applications, and data against cyber threats.</li>
+                        <li>Key cloud security principles:
+                            <ul>
+                                <li><strong>Data Encryption:</strong> Ensuring sensitive data is encrypted both at rest and in transit to protect against unauthorized access.</li>
+                                <li><strong>Access Controls:</strong> Implementing strong authentication and role-based access control (RBAC) to limit access to cloud resources.</li>
+                                <li><strong>Compliance:</strong> Ensuring cloud services comply with regulations and standards, such as GDPR or HIPAA.</li>
+                            </ul>
+                        </li>
+                        <li>Popular cloud security tools:
+                            <ul>
+                                <li><a href="https://aws.amazon.com/security/" class="text-blue-400 hover:underline" target="_blank">AWS Security Services</a> - A range of security tools and services for protecting AWS cloud environments.</li>
+                                <li><a href="https://cloud.google.com/security" class="text-blue-400 hover:underline" target="_blank">Google Cloud Security</a> - Provides security solutions to protect workloads on Google Cloud Platform.</li>
+                                <li><a href="https://azure.microsoft.com/en-us/services/security-center/" class="text-blue-400 hover:underline" target="_blank">Azure Security Center</a> - A unified infrastructure security management system for strengthening security across Azure environments.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tip:</strong> Regularly review and update security policies and configurations to address new cloud security threats.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Video Resources</h3>
+            <div class="video-container">
+                <iframe id="videoFrames6" class="rounded-lg" src="https://www.youtube.com/embed/tNWj5uGIqok?si=rMY2O4LHhTwyC5v_" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames6" class="rounded-lg" src="https://www.youtube.com/embed/sBuxwMAfGnI?si=XQJfTdKv8puPL-HV" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames6" class="rounded-lg" src="https://www.youtube.com/embed/qA0YcYMRWyI?si=lguWTMTpcaWjcRbE" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames6" class="rounded-lg" src="https://www.youtube.com/embed/B8i49C8fC3E?si=PYzHJfjda1Tbtzfg" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames6" class="rounded-lg" src="https://www.youtube.com/embed/Nbnht4fvTDs?si=ZYaZbN2cSPSYKaWj" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe id="videoFrames6" class="rounded-lg" src="https://www.youtube.com/embed/videoseries?si=hLYFXuFcYAxTUodM&amp;list=PLsfnCRA9QVnSj4gbP5W1W1CXjPRhe1oE2" title="Computer Types and Parts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="mt-8 section-card p-6">
+        <h3 class="text-xl font-semibold mb-4">Recommended Resources</h3>
+        <ul class="list-disc pl-5 space-y-2">
+            <ul class="list-disc pl-5 space-y-2">
+                <li>
+                    <strong>Book: "Practical Malware Analysis" by Michael Sikorski & Andrew Honig</strong> - A hands-on guide to analyzing and reverse-engineering malicious software.
+                </li>
+                <li>
+                    <strong>Book: "The Art of Memory Forensics" by Michael Hale Ligh</strong> - A comprehensive resource for analyzing volatile memory and uncovering advanced attacks.
+                </li>
+                <li>
+                    <a href="https://www.udemy.com/course/ehf-maldev-in-windows/?couponCode=NVDIN35" class="text-blue-400 hover:underline" target="_blank">Udemy Malware Analysis for Beginners</a> - A course designed for those new to malware analysis, covering the basics and providing hands-on labs.
+                </li>
+                
+                <li>
+                    <a href="https://www.cybrary.it/course/incident-response-and-handling/" class="text-blue-400 hover:underline" target="_blank">Cybrary Incident Response and Handling</a> - A free course focusing on incident response strategies and frameworks.
+                </li>
+                <li>
+                    <a href="https://www.malwarebytes.com/malware-analysis/" class="text-blue-400 hover:underline" target="_blank">Malwarebytes Malware Analysis Resources</a> - Articles and resources on malware types and analysis techniques.
+                </li>
+            </ul>
+            
+            <!-- Summary -->
+            <h3 class="mt-5 text-lg font-semibold">Summary</h3>
+            <p>
+                Mastering Malware Analysis, Network Forensics, and Incident Response is essential for cybersecurity professionals. Through hands-on practice with tools, participation in CTFs, and ongoing education via courses and books, you can develop the skills necessary to effectively combat cyber threats. This roadmap provides a structured path for building your expertise, while the resources listed will further enhance your learning experience.
+            </p>
+        </ul>
+    </div>
+</section>
+
+<!-- Certifications Section -->
+<section id="certifications" class="mb-16 fade-in">
+    <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-certificate mr-2"></i>Certifications</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Key Certifications</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>CompTIA Security+</strong> - A foundational certification covering essential security concepts and best practices.</li>
+                    <li><strong>Certified Ethical Hacker (CEH)</strong> - Focuses on the skills and knowledge needed to identify vulnerabilities and threats in systems.</li>
+                    <li><strong>CISSP (Certified Information Systems Security Professional)</strong> - An advanced certification validating expertise in designing and managing security programs.</li>
+                    <li><strong>Certified Information Security Manager (CISM)</strong> - Focuses on managing and governing an enterprise's information security program.</li>
+                    <li><strong>Certified Information Systems Auditor (CISA)</strong> - Emphasizes information systems auditing, control, and security.</li>
+                    <li><strong>CompTIA Cybersecurity Analyst (CySA+)</strong> - Centers on threat detection, analysis, and response strategies.</li>
+                    <li><strong>CompTIA Advanced Security Practitioner (CASP+)</strong> - An advanced certification for experienced security professionals covering enterprise security, risk management, and compliance.</li>
+                    <li><strong>GIAC Security Essentials (GSEC)</strong> - Validates knowledge of information security concepts and hands-on skills.</li>
+                    <li><strong>Offensive Security Certified Professional (OSCP)</strong> - A hands-on penetration testing certification focused on practical skills.</li>
+                    <li><strong>Certified Cloud Security Professional (CCSP)</strong> - Covers cloud security architecture, governance, and risk management.</li>
+                    <li><strong>EC-Council Certified Security Analyst (ECSA)</strong> - Focuses on advanced penetration testing and security assessment techniques.</li>
+                </ul>
+                
+            </ul>
+        </div>
+        <div class="section-card p-6">
+            <h3 class="text-xl font-semibold mb-4">Recommended Study Resources</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><a href="https://www.comptia.org/certifications/security" class="text-blue-400 hover:underline" target="_blank">CompTIA Security+ Course</a></li>
+                <li><a href="https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/" class="text-blue-400 hover:underline" target="_blank">CEH Certification Info</a></li>
+                <li><a href="https://www.isc2.org/Certifications/CISSP" class="text-blue-400 hover:underline" target="_blank">CISSP Certification Info</a></li>
+                <li><a href="https://www.isaca.org/credentialing/cism" class="text-blue-400 hover:underline" target="_blank">CISM Certification Info</a></li>
+                <li><a href="https://www.isaca.org/credentialing/cisa" class="text-blue-400 hover:underline" target="_blank">CISA Certification Info</a></li>
+                <li><a href="https://www.comptia.org/certifications/cybersecurity-analyst" class="text-blue-400 hover:underline" target="_blank">CySA+ Certification Info</a></li>
+                <li><a href="https://www.comptia.org/certifications/comptia-advanced-security-practitioner" class="text-blue-400 hover:underline" target="_blank">CASP+ Certification Info</a></li>
+                <li><a href="https://www.giac.org/certification/security-essentials-gsec" class="text-blue-400 hover:underline" target="_blank">GSEC Certification Info</a></li>
+                <li><a href="https://www.offensive-security.com/pwk-oscp/" class="text-blue-400 hover:underline" target="_blank">OSCP Certification Info</a></li>
+                <li><a href="https://www.isc2.org/Certifications/CCSP" class="text-blue-400 hover:underline" target="_blank">CCSP Certification Info</a></li>
+                <li><a href="https://www.eccouncil.org/programs/ecsa-ec-council-certified-security-analyst/" class="text-blue-400 hover:underline" target="_blank">ECSA Certification Info</a></li>
+            </ul>
+            
+        </div>
+    </div>
+</section>
+
+
+
+    </main>
+
+    <!-- Full-width Newsletter Section -->
+<section class="bg-green-600 text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <!-- <div class="mb-6 md:mb-0 md:w-1/2">
+                <h2 class="text-3xl font-bold mb-2">Subscribe to Our Newsletter</h2>
+                <p class="text-lg">Stay updated with our latest content and cybersecurity insights.</p>
+            </div> -->
+            <div class="w-full md:w-1/2">
+                <iframe
+                    src="https://gamkers.beehiiv.com/subscribe"
+                    style="width:200%;height:250px;border:none;overflow:hidden;background:transparent;"
+                    scrolling="yes"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-green-400 p-6">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+            <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+                <li><a href="#introduction" class="hover:text-yellow-300 transition duration-300">Introduction</a></li>
+                <li><a href="#networking" class="hover:text-yellow-300 transition duration-300">Networking Fundamentals</a></li>
+                <li><a href="#os-scripting" class="hover:text-yellow-300 transition duration-300">OS & Scripting</a></li>
+                <li><a href="#web-security" class="hover:text-yellow-300 transition duration-300">Web Security</a></li>
+                <li><a href="#ethical-hacking" class="hover:text-yellow-300 transition duration-300">Ethical Hacking</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <h3 class="text-xl font-bold mb-4">Stay Connected</h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300"><i class="fab fa-facebook-f mr-2"></i>Facebook</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300"><i class="fab fa-twitter mr-2"></i>Twitter</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+            <p><i class="fas fa-envelope mr-2"></i>gamkersofficial@gmail.com</p>
+        </div>
+    </div>
+</footer>
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width/fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++)
+            {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        function createVideoSwitcher(videoFrameId, prevButtonId, nextButtonId, videos) {
+        let currentIndex = 0;
+        const videoFrame = document.getElementById(videoFrameId);
+        const prevButton = document.getElementById(prevButtonId);
+        const nextButton = document.getElementById(nextButtonId);
+
+        function updateVideo() {
+            videoFrame.src = videos[currentIndex];
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+            updateVideo();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % videos.length;
+            updateVideo();
+        });
+
+        // Initialize the video
+        updateVideo();
+    }
+
+    // Create video switchers for each section
+    createVideoSwitcher('videoFrames1', 'prevVideos1', 'nextVideos1', [
+        "https://www.youtube.com/embed/VbDrWHkOLro?si=TWJpQj_Q4Fh_-Aaz",
+        "https://www.youtube.com/embed/5AqK29t3fXA?si=-qQ47ZrcQh0BOtpA",
+        "https://www.youtube.com/embed/VlOeLfV-ATA?si=X-Gv1rPiGsQuYGJg"
+    ]);
+
+    createVideoSwitcher('videoFrames2', 'prevVideos2', 'nextVideos2', [
+        "https://www.youtube.com/embed/3NDhETVfrp0?si=TNBy0EQcGOzExTPu",
+        "https://www.youtube.com/embed/IPvYjXCsTg8?si=3Ni4dktrJdvdsjFG",
+        "https://www.youtube.com/embed/qiQR5rTSshw?si=iD6_rX7dOH-2h5QO",
+        "https://www.youtube.com/embed/n4muxtqLhN4?si=0b5RLgkwEx-Rmyso",
+        "https://www.youtube.com/embed/JHAMj2vN2oU?si=5mNL-8fOiEoxnEcA"
+    ]);
+
+    createVideoSwitcher('videoFrames3', 'prevVideos3', 'nextVideos3', [
+        "https://www.youtube.com/embed/ZtqBQ68cfJc?si=hhrOC87CDG9hqww4",
+        "https://www.youtube.com/embed/ZOoCaWyifmI?si=hy2WLncXbXsFnosT",
+        "https://www.youtube.com/embed/qwAFL1597eM?si=CEeVkSitLlI2mPpD",
+        "https://www.youtube.com/embed/m67-bOpOoPU?si=wbf2COtt0u9EWtsT",
+        "https://www.youtube.com/embed/tK9Oc6AEnR4?si=8C0So68hLUzsi1sM"
+    ]);
+
+
+
+
+
+
+
+    // Fade-in effect
+    document.addEventListener('DOMContentLoaded', function() {
+        const fadeIns = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        fadeIns.forEach(fadeIn => observer.observe(fadeIn));
+    });
+    </script>
+</body>
+</html>
